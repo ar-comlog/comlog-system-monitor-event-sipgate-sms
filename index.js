@@ -1,5 +1,5 @@
 var util = require('util');
-Sipgate = require('sipgate-client/lib/sipgate');
+Sipgate = require('./sipgate');
 
 function SipgateSMS(options) {
 	var _this = this;

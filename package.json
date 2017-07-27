@@ -1,11 +1,12 @@
 {
   "name": "comlog-system-monitor-event-sipgate-sms",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "SMS notification extension for comlog-system-monitor",
   "main": "index.js",
   "dependencies": {
-    "emailjs": "^1.0.11",
-    "sipgate-client": "0.0.1"
+    "node-rest-client": "~0.7.0",
+    "q": "^1.5.0",
+    "xmlrpc": "^1.3.2"
   },
   "devDependencies": {},
   "scripts": {
