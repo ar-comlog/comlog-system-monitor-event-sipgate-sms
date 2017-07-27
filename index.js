@@ -11,16 +11,20 @@ function SipgateSMS(options) {
 	this.text = "Service {$name} status changed to {$status} at {$datetime}";
 	this.to = "target-number"; // 49123456789
 	this.from = 'sipgate-number'; // 49987654321
+	this.debug = false;
 
-	var _handle = function (reason, res) {
+	var _handle = function (reason, res, cb) {
+		var err = null;
 		if (reason) {
-			console.error(new Error(reason));
+			err = new Error(reason);
+			if (_this.debug) console.error(err);
 		} else {
-			console.log(util.inspect(res, {
+			if (_this.debug) console.log(util.inspect(res, {
 				colors: true,
 				depth: null
 			}));
 		}
+		if (cb) cb(err, res);
 	};
 
 	this.start = function(info, cb) {
@@ -44,37 +48,23 @@ function SipgateSMS(options) {
 			opt.to = opt.to.split('{$'+i+'}').join(this[i]);
 		}
 
-		new Sipgate({"user": _this.user, "pass": _this.password}, function(sipgate) {
+		/*new Sipgate({"user": _this.user, "pass": _this.password}, function(sipgate) {
 			return sipgate.ownUriListGet().then(
-				function (res) { return _handle(null, res); }
-				, function (res) { return _handle(res, null); }
-			);
-		});
-		new Sipgate({"user": _this.user, "pass": _this.password}, function(sipgate) {
-			return sipgate.sessionInitiate({
-				TOS:'text',
-				RemoteUri: 'sip:'+opt.to+'@sipgate.net',
-				LocalUri: 'sip:'+opt.from+'@sipgate.net',
-				Content: opt.text
-			}).then(
-				function (res) { _handle(null, res); },
-				function (res) { _handle(res, null); }
-			);
-		});
-
-		/*var user = {"user": this.user, "pass": this.password};
-		new Sipgate(login, function(sipgate) {
-			return sipgate.sessionInitiate({
-				TOS:'text',
-				RemoteUri: 'sip:'+opt.to+'@sipgate.net',
-				LocalUri: 'sip:'+opt.from+'@sipgate.net',
-				Content: opt.text
-			}).then(
-				function (res) { _responseHanle(null, res); },
-				function (res) { _responseHanle(res, null); }
+				function (res) { return _handle(null, res, cb); }
+				, function (res) { return _handle(res, null, cb); }
 			);
 		});*/
-
+		new Sipgate({"user": _this.user, "pass": _this.password}, function(sipgate) {
+			return sipgate.sessionInitiate({
+				TOS:'text',
+				RemoteUri: 'sip:'+opt.to+'@sipgate.net',
+				LocalUri: 'sip:'+opt.from+'@sipgate.net',
+				Content: opt.text
+			}).then(
+				function (res) { _handle(null, res, cb); },
+				function (res) { _handle(res, null, cb); }
+			);
+		});
 	};
 
 	if (options) for(var i in options) this[i] = options[i];
