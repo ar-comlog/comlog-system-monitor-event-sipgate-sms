@@ -4,7 +4,8 @@
   "description": "SMS notification extension for comlog-system-monitor",
   "main": "index.js",
   "dependencies": {
-    "emailjs": "^1.0.11"
+    "emailjs": "^1.0.11",
+    "sipgate-client": "0.0.1"
   },
   "devDependencies": {},
   "scripts": {
