@@ -1,0 +1,29 @@
+{
+  "name": "comlog-system-monitor-event-sipgate-sms",
+  "version": "1.0.0",
+  "description": "SMS notification extension for comlog-system-monitor",
+  "main": "index.js",
+  "dependencies": {
+    "emailjs": "^1.0.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ar-comlog/comlog-system-monitor-event-sipgate-sms.git"
+  },
+  "keywords": [
+    "sipgate",
+    "sms",
+    "notification",
+    "watcher"
+  ],
+  "author": "COMLOG GmbH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ar-comlog/comlog-system-monitor-event-sipgate-sms/issues"
+  },
+  "homepage": "https://github.com/ar-comlog/comlog-system-monitor-event-sipgate-sms#readme"
+}
