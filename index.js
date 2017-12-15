@@ -8,10 +8,11 @@ function SipgateSMS(options) {
 	this.password = null;
 	this.timeout = 5000;
 
-	this.text = "Service {$name} status changed to {$status} at {$datetime}";
+	this.text = "Service {$label} status changed to {$status} at {$datetime}";
 	this.to = "target-number"; // 49123456789
 	this.from = 'sipgate-number'; // 49987654321
 	this.debug = false;
+	this.label = null;
 
 	var _handle = function (reason, res, cb) {
 		var err = null;
@@ -68,6 +69,8 @@ function SipgateSMS(options) {
 	};
 
 	if (options) for(var i in options) this[i] = options[i];
+	if (!this.label) this.label = this.name || this.host || 'unbekannt';
+
 	this.to = this.to.replace(/[^0-9]/g, '');
 	if (this.to.substr(0, 2) === '00') this.to = this.to.substr(2);
 	if (this.to.substr(0, 1) === '0') this.to = '49' + this.to.substr(1);
