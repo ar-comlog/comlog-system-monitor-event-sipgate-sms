@@ -14,13 +14,15 @@ function SipgateSMS(options) {
 	this.debug = false;
 	this.label = null;
 
+	this.logger = console;
+
 	var _handle = function (reason, res, cb) {
 		var err = null;
 		if (reason) {
 			err = new Error(reason);
-			if (_this.debug) console.error(err);
+			if (_this.debug) _this.logger.error(err);
 		} else {
-			if (_this.debug) console.log(util.inspect(res, {
+			if (_this.debug) _this.logger.debug(util.inspect(res, {
 				colors: true,
 				depth: null
 			}));
