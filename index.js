@@ -9,8 +9,8 @@ function SipgateSMS(options) {
 	this.timeout = 5000;
 
 	this.text = "Service {$label} status changed to {$status} at {$datetime}";
-	this.to = "target-number"; // 0123456789
-	this.from = 'sipgate-number'; // 0987654321
+	this.to = ''; // 0123456789
+	this.from = ''; // 0987654321
 	this.debug = false;
 	this.label = null;
 
@@ -63,12 +63,10 @@ function SipgateSMS(options) {
 		sms
 			.send(opt)
 			.then(function () {
-				debugger;
 				_handle(null, null, cb);
 				console.log('Sms sent.');
 			})
 			.catch(function (e) {
-				debugger;
 				_handle(e, null, cb);
 			});
 
