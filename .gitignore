@@ -1,2 +1,7 @@
 /package-lock.json
 /node_modules
+/test.js
+/.idea
+/sipgateV3.js
+/sipgate.js
+/sipgatev2.js
